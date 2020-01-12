@@ -3,7 +3,7 @@ require("./data/data.php");
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,24 +11,38 @@ require("./data/data.php");
     <title>Portfolio</title>
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/hamburgers.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <script defer
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+    <script defer type="text/javascript" src="./js/app.js"></script>
 </head>
 <body>
 
     <header>
+
         <nav class="header-nav">
+            <button class="hamburger hamburger--collapse" type="button">
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                </span>
+            </button>
             <ul class="header-nav-item-list">
-                <li class="header-nav-item header-nav-item-first">home</li>
-                <li class="header-nav-item">hello</li>
-                <li class="header-nav-item">who am i</li>
-                <li class="header-nav-item">what i do</li>
-                <li class="header-nav-item header-nav-item-last">say hi</li>
+                <li class="header-nav-item header-nav-item-first"><a href="#">home</a></li>
+                <li class="header-nav-item"><a href="#">hello</a></li>
+                <li class="header-nav-item"><a href="#">who am i</a></li>
+                <li class="header-nav-item"><a href="#">what i do</a></li>
+                <li class="header-nav-item header-nav-item-last"><a href="#">say hi</a></li>
             </ul>
         </nav>
+
         <div class="header-title-container">
             <h1>Samuel Daurt</h1>
             <p>Human booster guest loremp ipsum</p>
         </div>
+
     </header>
 
     <main>
@@ -40,51 +54,85 @@ require("./data/data.php");
                 <p class="section-intro-central-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim dolorem laborum porro quidem.</p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim dolorem laborum porro quidem in officiis aperiam repellat ea eum molestiae.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim dolorem laborum porro quidem in officiis aperiam repellat ea eum molestiae.</p>
                 <div class="section-intro-buttons">
-                    <div class="button button-work">see my work</div>
-                    <div class="button button-contact">contact me</div>
+                    <a href="#section-work" class="button button-work">see my work</a>
+                    <a href="#section-contact" class="button button-contact">contact me</a>
                 </div>
             </div>
         </section>
 
-        <section class="section-bio">
+        <section class="section-bio" id="section-bio">
             <h2>bio</h2>
             <div class="section-bio-content">
                 <img class="section-bio-main-image" src="./images/looking.jpg" alt="un regard">
                 <p class="section-bio-main-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim dolorem laborum porro quidem in officiis aperiam repellat ea eum molestiae.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim dolorem laborum porro quidem in officiis aperiam repellat ea eum molestiae.</p>
-                <div class="section-bio-skills-container">
-                    <div class="section-bio-skills-row section-bio-skills-row1">
-                        <div>développement</div>
-                        <div>technique</div>
-                    </div>
-                    <div class="section-bio-skills-row section-bio-skills-row2">
-                        <div>Langage</div>
-                        <div>Note</div>
-                        <div>Environnement</div>
-                        <div>Note</div>
-                    </div>
-                    <div class="section-bio-skills-row">
-                        <div>HTML</div>
-                        <div>étoiles</div>
-                        <div>Linux</div>
-                        <div>étoiles</div>
-                    </div>
-                    <div class="section-bio-skills-row">
-                        <div>CSS</div>
-                        <div>étoiles</div>
-                        <div>MacOs</div>
-                        <div>étoiles</div>
-                    </div>
-                    <div class="section-bio-skills-row">
-                        <div>PHP</div>
-                        <div>étoiles</div>
-                        <div>Windows</div>
-                        <div>étoiles</div>
-                        </div>
-                </div>
+                <table class="section-bio-skills-table">
+                    <thead>
+                        <tr class="section-bio-skills-row section-bio-skills-row1">
+                            <th colspan="2">développement</th>
+                            <th colspan="2">technique</th>
+                        </tr>
+                        <tr class="section-bio-skills-row section-bio-skills-row2">
+                            <th>Langage</th>
+                            <th>Note</th>
+                            <th>Environnement</th>
+                            <th>Note</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="section-bio-skills-row">
+                            <td>HTML</td>
+                            <td>
+                                <?php 
+                                for ($i=1; $i<$languageSkills["HTML"]; $i++) {
+                                    echo "★";
+                                } ?>
+                            </td>
+                            <td>Linux</td>
+                            <td>
+                                <?php 
+                                for ($i=1; $i<$environmentSkills["Linux"]; $i++) {
+                                    echo "★";
+                                } ?>
+                            </td>
+                        </tr>
+                        <tr class="section-bio-skills-row">
+                            <td>CSS</td>
+                            <td>
+                                <?php 
+                                for ($i=1; $i<$languageSkills["CSS"]; $i++) {
+                                    echo "★";
+                                } ?>
+                            </td>
+                            <td>MacOs</td>
+                            <td>
+                                <?php 
+                                for ($i=1; $i<$environmentSkills["MacOS"]; $i++) {
+                                    echo "★";
+                                } ?>
+                            </td>
+                        </tr>
+                        <tr class="section-bio-skills-row">
+                            <td>PHP</td>
+                            <td>
+                                <?php 
+                                for ($i=1; $i<$languageSkills["PHP"]; $i++) {
+                                    echo "★";
+                                } ?>
+                            </td>
+                            <td>Windows</td>
+                            <td>
+                                <?php 
+                                for ($i=1; $i<$environmentSkills["Windows"]; $i++) {
+                                    echo "★";
+                                } ?>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </section>
 
-        <section class="section-work">
+        <section class="section-work" id="section-work">
             <h2>work</h2>
             <div class="section-work-content">
 
@@ -102,47 +150,47 @@ require("./data/data.php");
             </div>
         </section>
 
-        <section class="section-contact">
+        <section class="section-contact" id="section-contact">
             <h2>contact</h2>
             <div class="section-contact-content">
 
                 <form class="section-contact-form" method="post" action="">
 
-                    <div class="section-contact-form-radio">
+                    <div class="section-contact-form-radio-container">
                         <label for="form-type">Human</label>
                         <input type="radio" name="type" id="form-type">
 
                         <label for="form-type">Not sure</label>
-                        <input type="radio" name="type" id="form-type">
+                        <input type="radio" name="type" id="form-type" checked>
 
                         <label for="form-type">Robot</label>
                         <input type="radio" name="type" id="form-type">
                     </div>
 
-                    <div>
-                        <label for="form-subject"></label>
+                    <div class="section-contact-form-input-container">
+                        <label for="form-subject">Subject</label>
                         <select class="section-contact-form-input" name="subject" id="form-subject">
-                            <option value="">work</option>
-                            <option value="">what</option>
-                            <option value="">other</option>
+                            <option value="">Work</option>
+                            <option value="">What?</option>
+                            <option value="">Other...</option>
                         </select>
                     </div>
 
-                    <div>
-                        <label for="form-nickname"></label>
-                            <input class="section-contact-form-input" type="text" name="nickname" id="form-nickname">
+                    <div class="section-contact-form-input-container">
+                        <label for="form-nickname">Nickname</label>
+                            <input class="section-contact-form-input" type="text" name="nickname" id="form-nickname" placeholder="Your nickname">
                         </label>
                     </div>
 
-                    <div>
-                        <label for="form-email"></label>
-                            <input class="section-contact-form-input" type="email" name="email" id="form-email">
+                    <div class="section-contact-form-input-container">
+                        <label for="form-email">Email address</label>
+                            <input class="section-contact-form-input" type="email" name="email" id="form-email" placeholder="Your email">
                         </label>
                     </div>
 
-                    <div>
-                        <label for="form-message"></label>
-                            <textarea class="section-contact-form-input" name="message" id="form-message"></textarea>
+                    <div class="section-contact-form-input-container">
+                        <label for="form-message">Message</label>
+                            <textarea class="section-contact-form-input" name="message" id="form-message" placeholder="Your message" rows="8"></textarea>
                         </label>
                     </div>
 

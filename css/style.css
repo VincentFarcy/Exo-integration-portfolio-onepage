@@ -1,37 +1,97 @@
 body {
-    max-width: 1000px;
+    max-width: 880px;
     min-width: 280px;
     margin: 0 auto;
     background-color: white;
+}
+body, textarea {
     font-family: 'Roboto', sans-serif;
     font-size: .8rem;
+    line-height: 1rem;
 }
+
+/************ header ************/
 header {
     color: white;
     background-image: url('../images/background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
 }
-
-
-.header-nav-item-list {
+.header-nav {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, .6);
+    min-height: 2rem;
+}
+@media (min-width:576px) {
+    .header-nav {
+        display: initial;
+        background-color: none;
+    }
+}
+.hamburger {
+    padding: 4px !important;  
+    height:100%;
+}
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after {
+    background-color: rgba(105, 209, 231, .9) !important;   
+}
+@media (min-width:576px) {
+    .hamburger {
+        display: none !important;
+    }
+}
+.header-nav-item-list {
+    display: none;
     flex-direction: row;
     list-style-type: none;
     text-transform: uppercase;
     opacity: .8;
 }
+@media (min-width:576px) {
+    .header-nav-item-list {
+        display: flex;
+    }
+}
+.header-nav-item-list--mobile {
+    position: absolute;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: calc(100vh - 2rem);
+    opacity: .9;
+    text-align: center;
+    z-index:99;
+}
 .header-nav-item {
     padding: 1rem .6rem;
-    background-color: rgb(0, 0, 0, 0.4);
-    border-bottom: 1px solid rgb(255, 255, 255, 0.6);
+    background-color: rgba(0, 0, 0, 0.4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.6);
 }
-.header-nav-item-first {
-    padding-left: 2rem;
+.header-nav-item a {
+    color: white;
+    text-decoration: none;
+}
+.header-nav-item-list--mobile .header-nav-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: 1.2rem;
+    background-color: black;
+}
+@media (min-width:576px) {
+    .header-nav-item-first {
+        padding-left: 2rem;
+    }
 }
 .header-nav-item-last {
     padding-right: 1rem;
-    border-right: 1px solid rgb(255, 255, 255, 0.6);
+    border-right: 1px solid rgba(255, 255, 255, 0.6);
     border-radius: 0 0 10px 0;
 }
 .header-title-container {
@@ -51,12 +111,13 @@ header {
     opacity: .8;
 }
 
+/************ all sections ************/
 section {
-    padding: 0 1rem 4rem;
+    padding: 0 1rem 5rem;
 }
 @media (min-width:576px) {
     section {
-        padding: 0 8rem 4rem;
+        padding: 0 4rem 5rem;
     }
 }
 section h2 {
@@ -71,6 +132,8 @@ section h2 {
     font-weight: bold;
     background-color: inherit;
 }
+
+/************ section intro ************/
 .section-intro {
     color: white;
     background-color: #69d1e7;
@@ -85,13 +148,15 @@ section h2 {
 .section-intro-central-text {
     padding: 3rem 1.5rem;
     font-size: 1.6rem;
-    border: 1px solid rgb(255, 255, 255, 0.4);
+    line-height: normal;
+    border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 6px;
 }
 .section-intro-buttons {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    padding-bottom: 0;
 }
 .section-intro-buttons .button {
     min-width: 6rem;
@@ -99,6 +164,7 @@ section h2 {
     margin: 0 .5rem;
     text-transform: uppercase;
     font-size: .7rem;
+    text-decoration: none;
     border: 2px solid #41454c;
     border-radius: 6px;
 }
@@ -117,9 +183,9 @@ section h2 {
     color: #41454c;
 }
 
-
+/************ section bio ************/
 .section-bio {
-    color: black;
+    color: rgba(0, 0, 0, .8);
     background-color: white;
     text-align: center;
 }
@@ -132,14 +198,19 @@ section h2 {
 .section-bio-main-image {
     width: 100%;
 }
-.section-bio-skills-row {
-    display: flex;
-    flex-direction: row;
+.section-bio-skills-table {
+    width: 100%;
+    color: black;
 }
 .section-bio-skills-row>* {
     width: 25%;
-    padding: .6rem;
-    border: 1px solid #41454c;
+    padding: .6rem .1rem;
+    border: 1px solid rgba(65, 69, 76, 0.2);
+}
+@media (min-width:576px) {
+    .section-bio-skills-row>* {
+        padding: .6rem;
+    }
 }
 .section-bio-skills-row1 {
     background-color: #69d1e7;
@@ -155,21 +226,22 @@ section h2 {
     background-color: #41454c;
     color: white;
     font-weight: bold;
-    text-transform: uppercase;
+    text-align: center;
     font-size: .7rem;
 }
-.section-bio-skills-row2>* {
-    width: 50%;
-    border: 1px solid transparent;
+@media (min-width:576px) {
+    .section-bio-skills-row2 {
+        text-align: left;
+        text-transform: uppercase;
+    }
 }
 
+/************ section work ************/
 .section-work {
     color: black;
     background-color: #eff0f0;
     text-align: center;
 }
-
-
 .section-work {
     color: black;
     background-color: #eff0f0;
@@ -181,8 +253,26 @@ section h2 {
     flex-wrap: wrap;
 }
 .section-work-article {
-    width: calc(100%/3 - 2rem);
-    margin: 0 1rem;
+    width: 100%;
+    margin: 0 0 2rem;
+}
+@media (min-width:576px) {
+    .section-work-article {
+        width: calc(100%/3 - .8rem);
+        margin: 0 .4rem;
+    }
+}
+@media (min-width:768px) {
+    .section-work-article {
+        width: calc(100%/3 - 2.4rem);
+        margin: 0 1.2rem;
+    }
+}
+@media (min-width:992px) {
+    .section-work-article {
+        width: calc(100%/3 - 3.6rem);
+        margin: 0 1.8rem;
+    }
 }
 .section-work-article h3 {
     padding: 1.4rem 0;
@@ -195,9 +285,15 @@ section h2 {
     border: .5rem solid white;
 }
 .section-work-article-text {
-    height: 5rem;
+    height: 4rem;
     margin-bottom: 1rem;
-    border-bottom: 1px solid rgb(0, 0, 0, .2);
+    color: rgba(0, 0, 0, .8);
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
+}
+@media (min-width: 576px) {
+    .section-work-article-text {
+        height: 7rem;
+    }
 }
 .section-work-article-link {
     display: block;
@@ -206,52 +302,94 @@ section h2 {
     color: white;
     text-decoration: none;
     text-transform: uppercase;
+    font-size: .7rem;
 }
 
-
+/************ section contact ************/
 .section-contact {
-    color: white;
+    color: rgba(255, 255, 255, 0.6);
     background-color: #2c2f37;
+    padding-bottom: 3rem;
 }
 .section-contact-content {
     display: flex;
+    flex-wrap: wrap;
 }
 .section-contact-form {
-    width:60%;
+    width:100%;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    padding-right: 1rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid white;
 }
-.section-contact-form-radio {
+@media (min-width:576px) {
+    .section-contact-form {
+        width:60%;
+        padding-bottom: 1rem;
+        padding-right: 1.5rem;
+        border-bottom: none;
+        border-right: 1px solid white;
+    }
+}
+.section-contact-form-radio-container {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
 }
+.section-contact-form-radio-container input {
+    margin: -1px 8px 0; 
+    vertical-align: middle;
+}
+.section-contact-form-input-container {
+    margin-top: 1rem;
+}
 .section-contact-form-input {
     width:100%;
-    padding: 0;
+    box-sizing: border-box;
+    margin-top: .1rem;
+    padding: .6rem;
+    color: rgba(105, 209, 231, .8);
+    background-color: #56595f;
+    border: 0;
+}
+.section-contact-form-input::placeholder { 
+    color: #69d1e7;
+    opacity: .8; /* Firefox */
 }
 .section-contact-form-buttons-container {
+    margin-top: 1rem;
     display: flex;
     flex-direction: row;
 }
 .section-contact-form-button {
-    padding: .4rem;
+    padding: .7rem;
     margin-right: .4rem;
     background-color:#69d1e7;
     border-radius: 4px;
     text-decoration: none;
+    font-weight: bold;
+    font-size: .7rem;
     color: black;
 }
 .section-contact-main-text {
-    width:40%;
+    box-sizing: border-box;
+    width:100%;
     display: flex;
     flex-direction: column;
-    padding-left: 1rem;
-    border-left: 1px solid white;
+    margin-top: 1rem;
+    padding-top: 1.5rem;
+}
+@media (min-width:576px) {
+    .section-contact-main-text {
+        width:40%;
+        margin-top: none;
+        padding-top: 1rem;
+        padding-left: 1.5rem;
+    }
 }
 
-
+/************ footer ************/
 footer {
     padding: 0 1rem;
     height: 8rem;
@@ -268,5 +406,5 @@ footer {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    color: rgb(255, 255, 255, .7);
+    color: rgba(255, 255, 255, .7);
 }
