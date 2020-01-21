@@ -1,5 +1,22 @@
 <?php 
 require("./data/data.php");
+
+
+
+// Contact form send management with $_session variable
+session_start();
+$modalStatus = "hidden";
+$arrowUpStatus = "";
+if(isset($_SESSION["modal-status"])) {
+    $modalStatus = "";
+    $arrowUpStatus = "hidden";
+    unset($_SESSION["modal-status"]);
+}
+if(isset($_POST["modal-status"])) {
+    echo(1);
+    $_SESSION["modal-status"] = $_POST["modal-status"];
+    header("location:" . $_SERVER['REQUEST_URI']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +29,8 @@ require("./data/data.php");
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/hamburgers.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap" >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script defer
         src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -23,18 +41,18 @@ require("./data/data.php");
 
     <header>
 
-        <nav class="header-nav">
+        <nav id="header-nav" class="header-nav">
             <button class="hamburger hamburger--collapse" type="button">
                 <span class="hamburger-box">
                     <span class="hamburger-inner"></span>
                 </span>
             </button>
             <ul class="header-nav-item-list">
-                <li class="header-nav-item header-nav-item-first"><a href="#">home</a></li>
-                <li class="header-nav-item"><a href="#">hello</a></li>
-                <li class="header-nav-item"><a href="#">who am i</a></li>
-                <li class="header-nav-item"><a href="#">what i do</a></li>
-                <li class="header-nav-item header-nav-item-last"><a href="#">say hi</a></li>
+                <li class="header-nav-item header-nav-item-first"><a class="inactive-link" href="#">home</a></li>
+                <li class="header-nav-item"><a class="inactive-link" href="#">hello</a></li>
+                <li class="header-nav-item"><a class="inactive-link" href="#">who am i</a></li>
+                <li class="header-nav-item"><a class="inactive-link" href="#">what i do</a></li>
+                <li class="header-nav-item header-nav-item-last"><a class="inactive-link" href="#">say hi</a></li>
             </ul>
         </nav>
 
@@ -54,8 +72,8 @@ require("./data/data.php");
                 <p class="section-intro-central-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim dolorem laborum porro quidem.</p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim dolorem laborum porro quidem in officiis aperiam repellat ea eum molestiae.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim dolorem laborum porro quidem in officiis aperiam repellat ea eum molestiae.</p>
                 <div class="section-intro-buttons">
-                    <a href="#section-work" class="button button-work">see my work</a>
-                    <a href="#section-contact" class="button button-contact">contact me</a>
+                    <a href="#section-work" id="section-intro-button-work" class="button button-style1">see my work</a>
+                    <a href="#section-contact" id="section-intro-button-contact" class="button button-style2">contact me</a>
                 </div>
             </div>
         </section>
@@ -142,7 +160,7 @@ require("./data/data.php");
                     <img class="section-work-article-image" src="./images/<?=$workPost["picture"]?>" alt="<?=$workPost["title"]?>">
                     <h3><?=$workPost["title"]?></h3>
                     <p class="section-work-article-text"><?=$workPost["summary"]?></p>
-                    <a class="section-work-article-link" href="<?=$workPost["link"]?>">read more</a>
+                    <a class="section-work-article-link inactive-link" href="#">read more</a>
                 </article>
 
 <?php } ?>
@@ -154,7 +172,9 @@ require("./data/data.php");
             <h2>contact</h2>
             <div class="section-contact-content">
 
-                <form class="section-contact-form" method="post" action="">
+                <form class="section-contact-form" id="contact-form" method="post" action="">
+
+                    <input type="hidden" id="modal-status" name="modal-status" value="show">
 
                     <div class="section-contact-form-radio-container">
                         <label for="form-type">Human</label>
@@ -169,34 +189,36 @@ require("./data/data.php");
 
                     <div class="section-contact-form-input-container">
                         <label for="form-subject">Subject</label>
-                        <select class="section-contact-form-input" name="subject" id="form-subject">
-                            <option value="">Work</option>
-                            <option value="">What?</option>
-                            <option value="">Other...</option>
+                        <select class="section-contact-form-input" name="subject" id="form-subject" required>
+                            <option value="">The subject of your message</option>
+
+<?php foreach($contactSubjects as $contactSubject) { ?>
+                            <option value="<?=$contactSubject?>"><?=$contactSubject?></option>
+<?php } ?>
                         </select>
                     </div>
 
                     <div class="section-contact-form-input-container">
                         <label for="form-nickname">Nickname</label>
-                            <input class="section-contact-form-input" type="text" name="nickname" id="form-nickname" placeholder="Your nickname">
+                            <input class="section-contact-form-input" type="text" name="nickname" id="form-nickname" placeholder="Your nickname" required maxlength="256">
                         </label>
                     </div>
 
                     <div class="section-contact-form-input-container">
                         <label for="form-email">Email address</label>
-                            <input class="section-contact-form-input" type="email" name="email" id="form-email" placeholder="Your email">
+                            <input class="section-contact-form-input" type="email" name="email" id="form-email" placeholder="Your email" required maxlength="255">
                         </label>
                     </div>
 
                     <div class="section-contact-form-input-container">
                         <label for="form-message">Message</label>
-                            <textarea class="section-contact-form-input" name="message" id="form-message" placeholder="Your message" rows="8"></textarea>
+                            <textarea class="section-contact-form-input" name="message" id="form-message" placeholder="Your message" rows="8" required maxlength="2000"></textarea>
                         </label>
                     </div>
 
                     <div class="section-contact-form-buttons-container">
-                        <a class="section-contact-form-button" href="#" id="form-button-reset">reset</a>
-                        <a class="section-contact-form-button" href="#" id="form-button-send">Send this message!</a>
+                        <button type="reset" class="section-contact-form-button" id="form-button-reset">reset</button>
+                        <button type="submit" class="section-contact-form-button" id="form-button-send">Send this message</button>
                     </div>
 
                 </form>
@@ -208,6 +230,23 @@ require("./data/data.php");
         </section>
 
     </main>
+
+    <div id="modal" class="modal <?=$modalStatus?>">
+        <div class="modal-container">
+            <div class="modal-text-container">
+                <p class="modal-text"><?=($modalStatus==="") ? "Message non envoyé (site de présentation)." : ""?></p>
+            </div>
+            <div class="modal-button-container">
+                <button type="button" class="modal-button modal-button-close">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="arrow-up" class="arrow-up <?=$arrowUpStatus?>">
+        <a href="#">
+            <i class="fa fa-arrow-circle-up"></i>
+        </a>
+    </div>
 
     <footer>
         <p class="footer-text">Samuel Daurt copyright... Lorem ipsum dolor sit amet.</p>

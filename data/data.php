@@ -36,4 +36,11 @@ $workPosts = [
   ]
 ];
 
+// Sujets sélectionnables lors de l'envoi du mail
+$contactSubjects = [
+    'work',
+    'what?',
+    'other'
+];
+
 
